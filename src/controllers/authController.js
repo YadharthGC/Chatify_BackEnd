@@ -20,7 +20,7 @@ export const handleSignup = async (req, res) => {
 
       if (newUser) {
         //generate jwt
-        generateToken(newUser._id, res);
+        // generateToken(newUser._id, res);
         await newUser.save();
 
         res.status(200).json({
@@ -60,7 +60,7 @@ export const handleLogin = async (req, res) => {
           msg: "Invalid Crediantials",
         });
       } else {
-        generateToken(user._id, res);
+        // generateToken(user._id, res);
         res.status(200).json({
           msg: "login sucesfully",
           id: user._id,
