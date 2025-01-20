@@ -78,6 +78,24 @@ export const handleLogin = async (req, res) => {
   }
 };
 
+export const handleMainUser = async (req, res) => {
+  try {
+    let mainUserId = req.params.id;
+    let alreadyUser = await User.findOne({ _id: mainUserId });
+    console.log(alreadyUser);
+    if (alreadyUser) {
+      res.status(200).json({
+        msg: "userExists",
+        id: alreadyUser._id,
+        email: alreadyUser.email,
+        name: alreadyUser.fullName,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const handleLogout = async (req, res) => {
   try {
     console.log(req, res);

@@ -4,9 +4,12 @@ import User from "../models/userModel.js";
 
 export const handleGetUsers = async (req, res) => {
   try {
-    const allUsers = await User.find({ _id: { $ne: req.body.id } }).select(
-      "-password"
-    );
+    const allUsers = await User.find().select("-password");
+    allUsers.filter((data) => {
+      if (data.id !== req.body.mainUserId) {
+        return data;
+      }
+    });
     if (allUsers.length) {
       return res.status(200).json({
         allUsers: allUsers,
